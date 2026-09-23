@@ -1,2 +1,2 @@
-# PRABOWO GENDUT
+# GENDUT WOK
 ## I love Teddy.
