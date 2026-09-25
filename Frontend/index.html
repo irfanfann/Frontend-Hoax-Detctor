@@ -9,10 +9,7 @@
 <body>
     <main class="page">
 
-        <div class="brand">
-            MyFakta
-        </div>
-
+        <div class="brand">MyFakta</div>
         <div id="hero-wrapper">
             <section class="judul">
                 <h1>Periksa berita<br>sebelum percaya</h1>
@@ -25,10 +22,10 @@
                 <button id="analys">Periksa Artikel</button>
             </section>
         </div>
+
         <section id="result-section" class="hidden">
             <div class="result-card">
 
-                <!-- HEADER HASIL -->
                 <div class="result-header">
                     <div class="result-header-text">
                         <span class="badge-label">HASIL PEMERIKSAAN</span>
@@ -41,69 +38,58 @@
                     </div>
                 </div>
 
-                <!-- SKOR RISIKO -->
                 <div class="score-panel">
                     <div class="score-left">
                         <span class="score-label">SKOR RISIKO</span>
                         <div class="score-value">
-                            <span id="score-number">68</span><span class="score-max">/100</span>
+                            <span id="score-number">0</span><span class="score-max">/100</span>
                         </div>
                     </div>
-                    <p class="score-desc" id="score-desc">
-                        Beberapa sinyal membutuhkan pemeriksaan sumber primer sebelum artikel dibagikan.
-                    </p>
+                    <p class="score-desc" id="score-desc">-</p>
                 </div>
 
-                <!-- 4 KARTU ANALISIS -->
-                <div class="analysis-grid">
-
-                    <div class="analysis-card" 
-                        data-color="green"
-                        data-desc="Domain belum terdaftar sebagai media resmi. Cek dulu siapa pemilik domain, kapan didirikan, dan apakah memiliki halaman redaksi yang jelas.">
+                <div class="analysis-grid" id="analysis-grid">
+                    <div class="analysis-card"
+                         data-desc="Domain belum terdaftar sebagai media resmi. Cek dulu siapa pemilik domain, kapan didirikan, dan apakah memiliki halaman redaksi yang jelas.">
                         <div class="card-header">
                             <h3>Kredibilitas sumber</h3>
-                            <span class="card-percent green" id="pct-kredibilitas">20%</span>
+                            <span class="card-percent" id="pct-kredibilitas">0%</span>
                         </div>
-                        <div class="mini-bar"><div class="mini-fill green" id="bar-kredibilitas"></div></div>
-                        <p id="desc-kredibilitas">Domain belum berada pada daftar sumber yang telah dikurasi.</p>
+                        <div class="mini-bar"><div class="mini-fill" id="bar-kredibilitas"></div></div>
+                        <p id="desc-kredibilitas">-</p>
                     </div>
 
-                    <div class="analysis-card" 
-                        data-color="orange"
-                        data-desc="Frasa seperti 'sebarkan!', 'darurat!', atau 'jangan sampai ketinggalan!' sering dipakai untuk memancing emosi. Waspadai penggunaan huruf kapital berlebihan dan tanda seru bertumpuk.">
+                    <div class="analysis-card"
+                         data-desc="Frasa seperti 'sebarkan!', 'darurat!', atau 'jangan sampai ketinggalan!' sering dipakai untuk memancing emosi. Waspadai penggunaan huruf kapital berlebihan dan tanda seru bertumpuk.">
                         <div class="card-header">
                             <h3>Analisis bahasa</h3>
-                            <span class="card-percent orange" id="pct-bahasa">25%</span>
+                            <span class="card-percent" id="pct-bahasa">0%</span>
                         </div>
-                        <div class="mini-bar"><div class="mini-fill orange" id="bar-bahasa"></div></div>
-                        <p id="desc-bahasa">Frasa mendesak atau emosional perlu dibaca dengan lebih hati-hati.</p>
+                        <div class="mini-bar"><div class="mini-fill" id="bar-bahasa"></div></div>
+                        <p id="desc-bahasa">-</p>
                     </div>
 
-                    <div class="analysis-card" 
-                        data-color="red"
-                        data-desc="Cek tanggal publikasi, apakah kejadiannya masih relevan. Perhatikan juga apakah judul sesuai dengan isi, dan apakah ada kutipan yang dipotong dari konteks aslinya.">
-                        <div class="card-header">
-                            <h3>Evaluasi konteks</h3>
-                            <span class="card-percent red" id="pct-konteks">20%</span>
-                        </div>
-                        <div class="mini-bar"><div class="mini-fill red" id="bar-konteks"></div></div>
-                        <p id="desc-konteks">Bandingkan judul, tanggal, kutipan, dan konteks artikel lengkap.</p>
-                    </div>
-
-                    <div class="analysis-card" 
-                        data-color="purple"
-                        data-desc="Bandingkan klaim utama artikel dengan situs cek fakta seperti Turnbackhoax.id, Kompas Cek Fakta, atau AFP Fact Check. Kalau tidak ada yang membahas, kemungkinan besar klaimnya baru dan perlu verifikasi manual.">
+                    <div class="analysis-card"
+                         data-desc="Bandingkan klaim utama artikel dengan situs cek fakta seperti Turnbackhoax.id, Kompas Cek Fakta, atau AFP Fact Check.">
                         <div class="card-header">
                             <h3>Pencocokan fakta</h3>
-                            <span class="card-percent purple" id="pct-fakta">35%</span>
+                            <span class="card-percent" id="pct-fakta">0%</span>
                         </div>
-                        <div class="mini-bar"><div class="mini-fill purple" id="bar-fakta"></div></div>
-                        <p id="desc-fakta">Belum ada kecocokan yang cukup pada basis fakta pembanding.</p>
+                        <div class="mini-bar"><div class="mini-fill" id="bar-fakta"></div></div>
+                        <p id="desc-fakta">-</p>
                     </div>
 
+                    <div class="analysis-card"
+                         data-desc="Cek tanggal publikasi, apakah kejadiannya masih relevan. Perhatikan juga apakah judul sesuai dengan isi, dan apakah ada kutipan yang dipotong dari konteks aslinya.">
+                        <div class="card-header">
+                            <h3>Evaluasi konteks</h3>
+                            <span class="card-percent" id="pct-konteks">0%</span>
+                        </div>
+                        <div class="mini-bar"><div class="mini-fill" id="bar-konteks"></div></div>
+                        <p id="desc-konteks">-</p>
+                    </div>
                 </div>
 
-                <!-- LANGKAH BERIKUTNYA -->
                 <div class="next-step" id="next-step">
                     <div class="check-icon">✓</div>
                     <div>
@@ -113,8 +99,6 @@
                         </p>
                     </div>
                 </div>
-
-                <!-- TOMBOL AKSI -->
                 <div class="action-buttons">
                     <button id="reset-btn" class="btn-secondary">Cek Berita Lain</button>
                 </div>
@@ -123,13 +107,11 @@
         </section>
     </main>
 
-    <!-- LOADING OVERLAY -->
     <section id="loading-section" class="hidden">
         <div class="spinner"></div>
         <p>Sedang menganalisa artikel... Mohon tunggu</p>
     </section>
 
-    <!-- MODAL POPUP -->
     <div id="modal-overlay" class="modal-overlay hidden">
         <div class="modal-box">
             <div class="modal-icon">!</div>
@@ -140,57 +122,51 @@
     </div>
 
     <script>
-        const inputUrl      = document.getElementById('url');
-        const btnAnalys     = document.getElementById('analys');
-        const heroWrapper   = document.getElementById('hero-wrapper');
-        const loadingSection= document.getElementById('loading-section');
-        const resultSection = document.getElementById('result-section');
-
-        const resultTitle   = document.getElementById('result-title');
-        const resultUrl     = document.getElementById('result-url');
-        const verdictBadge  = document.getElementById('verdict-badge');
-        const verdictBadgeT = document.getElementById('verdict-badge-title');
-        const verdictBadgeS = document.getElementById('verdict-badge-sub');
-
-        const scoreNumber   = document.getElementById('score-number');
-        const scoreDesc     = document.getElementById('score-desc');
-
-        const nextStep      = document.getElementById('next-step');
-        const nextStepText  = document.getElementById('next-step-text');
-
-        const resetBtn      = document.getElementById('reset-btn');
-
-        // Modal
-        const modalOverlay  = document.getElementById('modal-overlay');
-        const modalTitle    = document.getElementById('modal-title');
-        const modalMessage  = document.getElementById('modal-message');
-        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const inputUrl       = document.getElementById('url');
+        const btnAnalys      = document.getElementById('analys');
+        const heroWrapper    = document.getElementById('hero-wrapper');
+        const loadingSection = document.getElementById('loading-section');
+        const resultSection  = document.getElementById('result-section');
+        const resultTitle    = document.getElementById('result-title');
+        const resultUrl      = document.getElementById('result-url');
+        const verdictBadge   = document.getElementById('verdict-badge');
+        const verdictBadgeT  = document.getElementById('verdict-badge-title');
+        const verdictBadgeS  = document.getElementById('verdict-badge-sub');
+        const scoreNumber    = document.getElementById('score-number');
+        const scoreDesc      = document.getElementById('score-desc');
+        const analysisGrid   = document.getElementById('analysis-grid');
+        const nextStep       = document.getElementById('next-step');
+        const nextStepText   = document.getElementById('next-step-text');
+        const resetBtn       = document.getElementById('reset-btn');
+        const modalOverlay   = document.getElementById('modal-overlay');
+        const modalTitle     = document.getElementById('modal-title');
+        const modalMessage   = document.getElementById('modal-message');
+        const modalCloseBtn  = document.getElementById('modal-close-btn');
 
         function showModal(title, message) {
             modalTitle.textContent = title;
             modalMessage.textContent = message;
             modalOverlay.classList.remove('hidden');
         }
-        function closeModal() { modalOverlay.classList.add('hidden'); }
+        function closeModal() {
+            modalOverlay.classList.add('hidden');
+        }
 
-        // Helper: set analisis card
         function setAnalysis(id, percent, desc) {
             document.getElementById('pct-' + id).textContent = percent + '%';
             document.getElementById('bar-' + id).style.width = percent + '%';
             document.getElementById('desc-' + id).textContent = desc;
         }
 
-        // Fungsi utama: menampilkan hasil
         function showResult(level) {
-            // level: 'green' | 'yellow' | 'red'
             loadingSection.classList.add('hidden');
             heroWrapper.classList.add('hidden');
             resultSection.classList.remove('hidden');
-
             resultUrl.textContent = inputUrl.value.trim();
-
-            // Reset badge class
             verdictBadge.className = 'verdict-badge';
+            analysisGrid.className = 'analysis-grid';
+            analysisGrid.classList.add('status-' + level);
+            nextStep.classList.remove('red', 'green');
 
             if (level === 'green') {
                 verdictBadge.classList.add('green');
@@ -201,11 +177,10 @@
                 scoreDesc.textContent = 'Sumber jelas, data valid, dan penulisan objektif. Artikel aman untuk dibagikan.';
 
                 setAnalysis('kredibilitas', 10, 'Domain terdaftar sebagai media resmi yang dikurasi.');
-                setAnalysis('bahasa', 15, 'Bahasa netral dan tidak memancing emosi pembaca.');
-                setAnalysis('fakta', 10, 'Klaim artikel cocok dengan basis fakta pembanding.');
-                setAnalysis('konteks', 15, 'Konteks artikel lengkap dan konsisten.');
+                setAnalysis('bahasa',      15, 'Bahasa netral dan tidak memancing emosi pembaca.');
+                setAnalysis('fakta',       10, 'Klaim artikel cocok dengan basis fakta pembanding.');
+                setAnalysis('konteks',     15, 'Konteks artikel lengkap dan konsisten.');
 
-                nextStep.classList.add('green');
                 nextStepText.textContent = 'Artikel dapat dibagikan. Tetap cantumkan sumber aslinya.';
 
             } else if (level === 'red') {
@@ -217,15 +192,14 @@
                 scoreDesc.textContent = 'Banyak sinyal risiko terdeteksi. Jangan bagikan sebelum diverifikasi lebih lanjut.';
 
                 setAnalysis('kredibilitas', 90, 'Domain tidak dikenal dan tidak terdaftar sebagai media resmi.');
-                setAnalysis('bahasa', 85, 'Bahasa sangat provokatif dan memancing emosi.');
-                setAnalysis('fakta', 92, 'Tidak ada kecocokan dengan basis fakta pembanding.');
-                setAnalysis('konteks', 80, 'Konteks artikel tidak lengkap dan menyesatkan.');
+                setAnalysis('bahasa',      85, 'Bahasa sangat provokatif dan memancing emosi.');
+                setAnalysis('fakta',       92, 'Tidak ada kecocokan dengan basis fakta pembanding.');
+                setAnalysis('konteks',     80, 'Konteks artikel tidak lengkap dan menyesatkan.');
 
                 nextStep.classList.add('red');
                 nextStepText.textContent = 'Jangan bagikan. Laporkan ke Kominfo atau platform terkait.';
 
             } else {
-                // YELLOW (default)
                 verdictBadge.classList.add('yellow');
                 verdictBadgeT.textContent = 'YELLOW';
                 verdictBadgeS.textContent = 'Perlu verifikasi';
@@ -233,42 +207,37 @@
                 scoreNumber.textContent = '68';
                 scoreDesc.textContent = 'Beberapa sinyal membutuhkan pemeriksaan sumber primer sebelum artikel dibagikan.';
 
-                setAnalysis('kredibilitas', 20, 'Domain belum berada pada daftar sumber yang telah dikurasi.');
-                setAnalysis('bahasa', 25, 'Frasa mendesak atau emosional perlu dibaca dengan lebih hati-hati.');
-                setAnalysis('fakta', 35, 'Belum ada kecocokan yang cukup pada basis fakta pembanding.');
-                setAnalysis('konteks', 20, 'Bandingkan judul, tanggal, kutipan, dan konteks artikel lengkap.');
+                setAnalysis('kredibilitas', 40, 'Domain belum berada pada daftar sumber yang telah dikurasi.');
+                setAnalysis('bahasa',      45, 'Frasa mendesak atau emosional perlu dibaca lebih hati-hati.');
+                setAnalysis('fakta',       55, 'Belum ada kecocokan yang cukup pada basis fakta pembanding.');
+                setAnalysis('konteks',     50, 'Bandingkan judul, tanggal, kutipan, dan konteks artikel lengkap.');
 
-                nextStep.classList.add('green');
                 nextStepText.textContent = 'Temukan sumber primer, cek tanggal publikasi, dan cari liputan dari media terpercaya lainnya.';
             }
 
             resultSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Klik tombol "Periksa Artikel"
-        btnAnalys.addEventListener('click', function() {
+        btnAnalys.addEventListener('click', function () {
             const url = inputUrl.value.trim();
             if (url === '') {
                 showModal('Perhatian', 'Silakan masukkan URL artikel terlebih dahulu!');
                 return;
             }
-
             resultSection.classList.add('hidden');
             loadingSection.classList.remove('hidden');
 
             setTimeout(() => {
-                // Simulasi: pilih salah satu dari 3 status
                 const r = Math.random();
                 let level = 'yellow';
-                if (r > 0.66) level = 'red';
+                if (r > 0.66)      level = 'red';
                 else if (r < 0.33) level = 'green';
 
                 showResult(level);
             }, 2000);
         });
 
-        // Tombol "Cek Berita Lain"
-        resetBtn.addEventListener('click', function() {
+        resetBtn.addEventListener('click', function () {
             resultSection.classList.add('hidden');
             heroWrapper.classList.remove('hidden');
             inputUrl.value = '';
@@ -276,7 +245,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Modal
         modalCloseBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', e => {
             if (e.target === modalOverlay) closeModal();

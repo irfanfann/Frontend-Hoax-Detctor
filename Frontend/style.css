@@ -237,6 +237,23 @@ button:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-bottom: 22px;
+    --status-color: #fbbf24;
+    --status-color-dark: #f5b014; 
+}
+
+.analysis-grid.status-green {
+    --status-color: #34d399;
+    --status-color-dark: #2ec48b;
+}
+
+.analysis-grid.status-yellow {
+    --status-color: #fbbf24;
+    --status-color-dark: #f5b014;
+}
+
+.analysis-grid.status-red {
+    --status-color: #f87171;
+    --status-color-dark: #f55f5f;
 }
 
 .analysis-card {
@@ -248,7 +265,6 @@ button:hover {
     cursor: pointer;
     overflow: hidden;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    --tooltip-bg: #2ec48b;
 }
 
 .analysis-card:hover {
@@ -284,12 +300,9 @@ button:hover {
     font-size: 14px;
     font-weight: 800;
     letter-spacing: -0.3px;
+    color: var(--status-color);
+    transition: color 0.4s ease;
 }
-
-.card-percent.green  { color: #34d399; }
-.card-percent.orange { color: #fbbf24; }
-.card-percent.purple { color: #a78bfa; }
-.card-percent.red    { color: #f87171; }
 
 .mini-bar {
     background: #eef2f8;
@@ -303,13 +316,9 @@ button:hover {
     height: 100%;
     border-radius: 3px;
     width: 0%;
-    transition: width 0.9s ease-in-out;
+    background: var(--status-color);
+    transition: width 0.9s ease-in-out, background 0.4s ease;
 }
-
-.mini-fill.green  { background: #34d399; }
-.mini-fill.orange { background: #fbbf24; }
-.mini-fill.purple { background: #a78bfa; }
-.mini-fill.red    { background: #f87171; }
 
 .analysis-card p {
     margin: 0;
@@ -318,16 +327,11 @@ button:hover {
     line-height: 1.5;
 }
 
-.analysis-card[data-color="green"]  { --tooltip-bg: #2ec48b; }
-.analysis-card[data-color="orange"] { --tooltip-bg: #f5b014; }
-.analysis-card[data-color="purple"] { --tooltip-bg: #9575f0; }
-.analysis-card[data-color="red"]    { --tooltip-bg: #f55f5f; }
-
 .analysis-card::after {
     content: attr(data-desc);
     position: absolute;
     inset: 0;
-    background: var(--tooltip-bg);
+    background: var(--status-color-dark);
     color: #fff;
     font-size: 12.5px;
     line-height: 1.6;
@@ -339,7 +343,8 @@ button:hover {
     opacity: 0;
     transform: translateY(12px);
     pointer-events: none;
-    transition: opacity 0.28s ease, transform 0.28s ease;
+    transition: opacity 0.28s ease, transform 0.28s ease,
+                background 0.4s ease;
     border-radius: 14px;
     font-weight: 500;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
