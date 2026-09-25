@@ -33,19 +33,31 @@
                         <p class="result-url" id="result-url">https://...</p>
                     </div>
                     <div id="verdict-badge" class="verdict-badge yellow">
-                        <span id="verdict-badge-title">YELLOW</span>
-                        <small id="verdict-badge-sub">Perlu verifikasi</small>
+                        <span class="verdict-badge-icon" id="verdict-badge-icon">!</span>
+                        <div class="verdict-badge-text">
+                            <span id="verdict-badge-title">YELLOW</span>
+                            <small id="verdict-badge-sub">Perlu verifikasi</small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="score-panel">
-                    <div class="score-left">
-                        <span class="score-label">SKOR RISIKO</span>
-                        <div class="score-value">
-                            <span id="score-number">0</span><span class="score-max">/100</span>
+                <div class="verdict-panel" id="verdict-panel">
+                    <div class="verdict-score">
+                        <span class="verdict-score-label">SKOR RISIKO</span>
+                        <div class="verdict-score-value">
+                            <span id="score-number">0</span><span class="verdict-score-max">/100</span>
                         </div>
                     </div>
-                    <p class="score-desc" id="score-desc">-</p>
+                    <div class="verdict-divider"></div>
+                    <div class="verdict-info">
+                        <p class="verdict-summary" id="score-desc">-</p>
+                        <div class="verdict-action">
+                            <div>
+                                <strong class="verdict-action-title">Langkah berikutnya</strong>
+                                <p id="next-step-text">-</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="analysis-grid" id="analysis-grid">
@@ -90,19 +102,9 @@
                     </div>
                 </div>
 
-                <div class="next-step" id="next-step">
-                    <div class="check-icon">✓</div>
-                    <div>
-                        <h4>Langkah berikutnya</h4>
-                        <p id="next-step-text">
-                            Temukan sumber primer, cek tanggal publikasi, dan cari liputan dari media terpercaya lainnya.
-                        </p>
-                    </div>
-                </div>
                 <div class="action-buttons">
                     <button id="reset-btn" class="btn-secondary">Cek Berita Lain</button>
                 </div>
-
             </div>
         </section>
     </main>
@@ -122,133 +124,147 @@
     </div>
 
     <script>
-        const inputUrl       = document.getElementById('url');
-        const btnAnalys      = document.getElementById('analys');
-        const heroWrapper    = document.getElementById('hero-wrapper');
-        const loadingSection = document.getElementById('loading-section');
-        const resultSection  = document.getElementById('result-section');
-        const resultTitle    = document.getElementById('result-title');
-        const resultUrl      = document.getElementById('result-url');
-        const verdictBadge   = document.getElementById('verdict-badge');
-        const verdictBadgeT  = document.getElementById('verdict-badge-title');
-        const verdictBadgeS  = document.getElementById('verdict-badge-sub');
-        const scoreNumber    = document.getElementById('score-number');
-        const scoreDesc      = document.getElementById('score-desc');
-        const analysisGrid   = document.getElementById('analysis-grid');
-        const nextStep       = document.getElementById('next-step');
-        const nextStepText   = document.getElementById('next-step-text');
-        const resetBtn       = document.getElementById('reset-btn');
-        const modalOverlay   = document.getElementById('modal-overlay');
-        const modalTitle     = document.getElementById('modal-title');
-        const modalMessage   = document.getElementById('modal-message');
-        const modalCloseBtn  = document.getElementById('modal-close-btn');
+    const inputUrl          = document.getElementById('url');
+    const btnAnalys         = document.getElementById('analys');
+    const heroWrapper       = document.getElementById('hero-wrapper');
+    const loadingSection    = document.getElementById('loading-section');
+    const resultSection     = document.getElementById('result-section');
 
-        function showModal(title, message) {
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modalOverlay.classList.remove('hidden');
+    const resultTitle       = document.getElementById('result-title');
+    const resultUrl         = document.getElementById('result-url');
+    const verdictBadge      = document.getElementById('verdict-badge');
+    const verdictBadgeIcon  = document.getElementById('verdict-badge-icon');
+    const verdictBadgeT     = document.getElementById('verdict-badge-title');
+    const verdictBadgeS     = document.getElementById('verdict-badge-sub');
+
+    const scoreNumber       = document.getElementById('score-number');
+    const scoreDesc         = document.getElementById('score-desc');
+
+    const analysisGrid      = document.getElementById('analysis-grid');
+    const verdictPanel      = document.getElementById('verdict-panel');
+    const nextStepText      = document.getElementById('next-step-text');
+
+    const resetBtn          = document.getElementById('reset-btn');
+
+    const modalOverlay      = document.getElementById('modal-overlay');
+    const modalTitle        = document.getElementById('modal-title');
+    const modalMessage      = document.getElementById('modal-message');
+    const modalCloseBtn     = document.getElementById('modal-close-btn');
+
+    function showModal(title, message) {
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+        modalOverlay.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        modalOverlay.classList.add('hidden');
+    }
+
+    function setAnalysis(id, percent, desc) {
+        document.getElementById('pct-' + id).textContent = percent + '%';
+        document.getElementById('bar-' + id).style.width = percent + '%';
+        document.getElementById('desc-' + id).textContent = desc;
+    }
+
+    function showResult(level) {
+        loadingSection.classList.add('hidden');
+        heroWrapper.classList.add('hidden');
+        resultSection.classList.remove('hidden');
+
+        resultUrl.textContent = inputUrl.value.trim();
+
+        verdictBadge.className = 'verdict-badge';
+        analysisGrid.className = 'analysis-grid';
+        verdictPanel.className = 'verdict-panel';
+
+        analysisGrid.classList.add('status-' + level);
+        verdictPanel.classList.add('status-' + level);
+
+        if (level === 'green') {
+            verdictBadge.classList.add('green');
+            verdictBadgeIcon.textContent = '✓';
+            verdictBadgeT.textContent = 'GREEN';
+            verdictBadgeS.textContent = 'Kredibel';
+            resultTitle.textContent = 'Artikel terverifikasi dan kredibel';
+            scoreNumber.textContent = '15';
+            scoreDesc.textContent = 'Sumber jelas, data valid, dan penulisan objektif. Artikel aman untuk dibagikan.';
+
+            setAnalysis('kredibilitas', 10, 'Domain terdaftar sebagai media resmi yang dikurasi.');
+            setAnalysis('bahasa',      15, 'Bahasa netral dan tidak memancing emosi pembaca.');
+            setAnalysis('fakta',       10, 'Klaim artikel cocok dengan basis fakta pembanding.');
+            setAnalysis('konteks',     15, 'Konteks artikel lengkap dan konsisten.');
+
+            nextStepText.textContent = 'Artikel dapat dibagikan. Tetap cantumkan sumber aslinya.';
+
+        } else if (level === 'red') {
+            verdictBadge.classList.add('red');
+            verdictBadgeIcon.textContent = '✕';
+            verdictBadgeT.textContent = 'RED';
+            verdictBadgeS.textContent = 'Terindikasi Hoax';
+            resultTitle.textContent = 'Artikel terindikasi hoax';
+            scoreNumber.textContent = '88';
+            scoreDesc.textContent = 'Banyak sinyal risiko terdeteksi. Jangan bagikan sebelum diverifikasi lebih lanjut.';
+
+            setAnalysis('kredibilitas', 90, 'Domain tidak dikenal dan tidak terdaftar sebagai media resmi.');
+            setAnalysis('bahasa',      85, 'Bahasa sangat provokatif dan memancing emosi.');
+            setAnalysis('fakta',       92, 'Tidak ada kecocokan dengan basis fakta pembanding.');
+            setAnalysis('konteks',     80, 'Konteks artikel tidak lengkap dan menyesatkan.');
+
+            nextStepText.textContent = 'Jangan bagikan. Laporkan ke Kominfo atau platform terkait.';
+
+        } else {
+            verdictBadge.classList.add('yellow');
+            verdictBadgeIcon.textContent = '!';
+            verdictBadgeT.textContent = 'YELLOW';
+            verdictBadgeS.textContent = 'Perlu verifikasi';
+            resultTitle.textContent = 'Artikel memerlukan verifikasi tambahan';
+            scoreNumber.textContent = '68';
+            scoreDesc.textContent = 'Beberapa sinyal membutuhkan pemeriksaan sumber primer sebelum artikel dibagikan.';
+
+            setAnalysis('kredibilitas', 40, 'Domain belum berada pada daftar sumber yang telah dikurasi.');
+            setAnalysis('bahasa',      45, 'Frasa mendesak atau emosional perlu dibaca lebih hati-hati.');
+            setAnalysis('fakta',       55, 'Belum ada kecocokan yang cukup pada basis fakta pembanding.');
+            setAnalysis('konteks',     50, 'Bandingkan judul, tanggal, kutipan, dan konteks artikel lengkap.');
+
+            nextStepText.textContent = 'Temukan sumber primer, cek tanggal publikasi, dan cari liputan dari media terpercaya lainnya.';
         }
-        function closeModal() {
-            modalOverlay.classList.add('hidden');
+
+        resultSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    btnAnalys.addEventListener('click', function () {
+        const url = inputUrl.value.trim();
+        if (url === '') {
+            showModal('Perhatian', 'Silakan masukkan URL artikel terlebih dahulu!');
+            return;
         }
 
-        function setAnalysis(id, percent, desc) {
-            document.getElementById('pct-' + id).textContent = percent + '%';
-            document.getElementById('bar-' + id).style.width = percent + '%';
-            document.getElementById('desc-' + id).textContent = desc;
-        }
+        resultSection.classList.add('hidden');
+        loadingSection.classList.remove('hidden');
 
-        function showResult(level) {
-            loadingSection.classList.add('hidden');
-            heroWrapper.classList.add('hidden');
-            resultSection.classList.remove('hidden');
-            resultUrl.textContent = inputUrl.value.trim();
-            verdictBadge.className = 'verdict-badge';
-            analysisGrid.className = 'analysis-grid';
-            analysisGrid.classList.add('status-' + level);
-            nextStep.classList.remove('red', 'green');
+        setTimeout(() => {
+            const r = Math.random();
+            let level = 'yellow';
+            if (r > 0.66)      level = 'red';
+            else if (r < 0.33) level = 'green';
 
-            if (level === 'green') {
-                verdictBadge.classList.add('green');
-                verdictBadgeT.textContent = 'GREEN';
-                verdictBadgeS.textContent = 'Kredibel';
-                resultTitle.textContent = 'Artikel terverifikasi dan kredibel';
-                scoreNumber.textContent = '15';
-                scoreDesc.textContent = 'Sumber jelas, data valid, dan penulisan objektif. Artikel aman untuk dibagikan.';
+            showResult(level);
+        }, 2000);
+    });
 
-                setAnalysis('kredibilitas', 10, 'Domain terdaftar sebagai media resmi yang dikurasi.');
-                setAnalysis('bahasa',      15, 'Bahasa netral dan tidak memancing emosi pembaca.');
-                setAnalysis('fakta',       10, 'Klaim artikel cocok dengan basis fakta pembanding.');
-                setAnalysis('konteks',     15, 'Konteks artikel lengkap dan konsisten.');
+    resetBtn.addEventListener('click', function () {
+        resultSection.classList.add('hidden');
+        heroWrapper.classList.remove('hidden');
+        inputUrl.value = '';
+        inputUrl.focus();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-                nextStepText.textContent = 'Artikel dapat dibagikan. Tetap cantumkan sumber aslinya.';
-
-            } else if (level === 'red') {
-                verdictBadge.classList.add('red');
-                verdictBadgeT.textContent = 'RED';
-                verdictBadgeS.textContent = 'Terindikasi Hoax';
-                resultTitle.textContent = 'Artikel terindikasi hoax';
-                scoreNumber.textContent = '88';
-                scoreDesc.textContent = 'Banyak sinyal risiko terdeteksi. Jangan bagikan sebelum diverifikasi lebih lanjut.';
-
-                setAnalysis('kredibilitas', 90, 'Domain tidak dikenal dan tidak terdaftar sebagai media resmi.');
-                setAnalysis('bahasa',      85, 'Bahasa sangat provokatif dan memancing emosi.');
-                setAnalysis('fakta',       92, 'Tidak ada kecocokan dengan basis fakta pembanding.');
-                setAnalysis('konteks',     80, 'Konteks artikel tidak lengkap dan menyesatkan.');
-
-                nextStep.classList.add('red');
-                nextStepText.textContent = 'Jangan bagikan. Laporkan ke Kominfo atau platform terkait.';
-
-            } else {
-                verdictBadge.classList.add('yellow');
-                verdictBadgeT.textContent = 'YELLOW';
-                verdictBadgeS.textContent = 'Perlu verifikasi';
-                resultTitle.textContent = 'Artikel memerlukan verifikasi tambahan';
-                scoreNumber.textContent = '68';
-                scoreDesc.textContent = 'Beberapa sinyal membutuhkan pemeriksaan sumber primer sebelum artikel dibagikan.';
-
-                setAnalysis('kredibilitas', 40, 'Domain belum berada pada daftar sumber yang telah dikurasi.');
-                setAnalysis('bahasa',      45, 'Frasa mendesak atau emosional perlu dibaca lebih hati-hati.');
-                setAnalysis('fakta',       55, 'Belum ada kecocokan yang cukup pada basis fakta pembanding.');
-                setAnalysis('konteks',     50, 'Bandingkan judul, tanggal, kutipan, dan konteks artikel lengkap.');
-
-                nextStepText.textContent = 'Temukan sumber primer, cek tanggal publikasi, dan cari liputan dari media terpercaya lainnya.';
-            }
-
-            resultSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        btnAnalys.addEventListener('click', function () {
-            const url = inputUrl.value.trim();
-            if (url === '') {
-                showModal('Perhatian', 'Silakan masukkan URL artikel terlebih dahulu!');
-                return;
-            }
-            resultSection.classList.add('hidden');
-            loadingSection.classList.remove('hidden');
-
-            setTimeout(() => {
-                const r = Math.random();
-                let level = 'yellow';
-                if (r > 0.66)      level = 'red';
-                else if (r < 0.33) level = 'green';
-
-                showResult(level);
-            }, 2000);
-        });
-
-        resetBtn.addEventListener('click', function () {
-            resultSection.classList.add('hidden');
-            heroWrapper.classList.remove('hidden');
-            inputUrl.value = '';
-            inputUrl.focus();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        modalCloseBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', e => {
-            if (e.target === modalOverlay) closeModal();
-        });
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => {
+        if (e.target === modalOverlay) closeModal();
+    });
     </script>
 </body>
 </html>

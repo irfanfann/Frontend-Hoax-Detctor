@@ -156,17 +156,40 @@ button:hover {
 }
 
 .verdict-badge {
-    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
     border-radius: 12px;
-    text-align: right;
-    min-width: 120px;
+    min-width: 140px;
 }
 
-.verdict-badge span {
+.verdict-badge-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.verdict-badge-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#verdict-badge-title {
     display: block;
     font-weight: 800;
     font-size: 13px;
     letter-spacing: 1px;
+    line-height: 1.1;
 }
 
 .verdict-badge small {
@@ -177,59 +200,117 @@ button:hover {
 }
 
 .verdict-badge.yellow { background: #fef3c7; color: #92400e; }
+.verdict-badge.yellow .verdict-badge-icon { background: #fbbf24; }
+
 .verdict-badge.green  { background: #d1fae5; color: #065f46; }
+.verdict-badge.green  .verdict-badge-icon { background: #34d399; }
+
 .verdict-badge.red    { background: #fee2e2; color: #991b1b; }
+.verdict-badge.red    .verdict-badge-icon { background: #f87171; }
 
-.score-panel {
-    background: #f5f8fc;
-    border-radius: 14px;
-    padding: 22px 26px;
+.verdict-panel {
     display: flex;
-    align-items: center;
-    gap: 32px;
+    align-items: stretch;
+    gap: 24px;
+    padding: 24px 26px;
+    border-radius: 16px;
     margin-bottom: 22px;
-    flex-wrap: wrap;
+    background: #f5f8fc;
+    border: 1px solid #e6ecf5;
+    transition: background 0.4s ease, border-color 0.4s ease;
 }
 
-.score-left {
-    min-width: 140px;
+.verdict-panel.status-green {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
 }
 
-.score-label {
+.verdict-panel.status-yellow {
+    background: #fffbeb;
+    border-color: #fde68a;
+}
+
+.verdict-panel.status-red {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.verdict-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 130px;
+}
+
+.verdict-score-label {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1px;
     color: #8894a7;
+    margin-bottom: 4px;
 }
 
-.score-value {
+.verdict-score-value {
     display: flex;
     align-items: baseline;
     gap: 4px;
-    margin-top: 4px;
 }
 
 #score-number {
-    font-size: 42px;
+    font-size: 46px;
     font-weight: 800;
     color: #10233f;
     letter-spacing: -2px;
     line-height: 1;
 }
 
-.score-max {
+.verdict-score-max {
     font-size: 14px;
     color: #8894a7;
     font-weight: 600;
 }
 
-.score-desc {
-    margin: 0;
+.verdict-divider {
+    width: 1px;
+    background: rgba(16, 35, 63, 0.08);
+    margin: 4px 0;
+    flex-shrink: 0;
+}
+
+.verdict-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
     flex: 1;
+    min-width: 0;
+}
+
+.verdict-summary {
+    margin: 0;
     color: #475569;
     font-size: 14px;
+    line-height: 1.55;
+}
+
+.verdict-action {
+    padding-top: 12px;
+    border-top: 1px dashed rgba(16, 35, 63, 0.1);
+}
+
+.verdict-action-title {
+    display: block;
+    font-size: 13px;
+    color: #10233f;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.verdict-action p {
+    margin: 0;
+    font-size: 13px;
+    color: #475569;
     line-height: 1.5;
-    min-width: 220px;
 }
 
 .analysis-grid {
@@ -238,7 +319,7 @@ button:hover {
     gap: 16px;
     margin-bottom: 22px;
     --status-color: #fbbf24;
-    --status-color-dark: #f5b014; 
+    --status-color-dark: #f5b014;
 }
 
 .analysis-grid.status-green {
@@ -337,9 +418,9 @@ button:hover {
     line-height: 1.6;
     padding: 22px 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
     opacity: 0;
     transform: translateY(12px);
     pointer-events: none;
@@ -356,51 +437,6 @@ button:hover {
     transform: translateY(0);
 }
 
-.next-step {
-    background: #ecfdf5;
-    border-radius: 14px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 22px;
-}
-
-.next-step.red {
-    background: #fef2f2;
-}
-
-.next-step.red .check-icon {
-    background: #ef4444;
-}
-
-.check-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #10b981;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.next-step h4 {
-    margin: 0 0 2px 0;
-    font-size: 14px;
-    color: #10233f;
-}
-
-.next-step p {
-    margin: 0;
-    font-size: 13px;
-    color: #475569;
-    line-height: 1.5;
-}
-
 .action-buttons {
     text-align: center;
 }
@@ -408,7 +444,7 @@ button:hover {
 .btn-secondary {
     background: #3469ec;
     color: #fff;
-    border: 0px;
+    border: 0;
     padding: 12px;
     border-radius: 10px;
     font-weight: 700;
@@ -508,6 +544,59 @@ button:hover {
     .analysis-grid { grid-template-columns: 1fr; }
     .result-card { padding: 22px; }
     .result-header { flex-direction: column; }
-    .verdict-badge { text-align: left; }
-    .score-panel { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .verdict-badge { min-width: auto; }
+
+    .verdict-panel {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+    }
+    .verdict-divider {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+    .verdict-score {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    /* ... aturan lama tetap ... */
+
+    /* Badge verdict: sembunyikan teks, hanya tampilkan ikon */
+    .verdict-badge-text {
+        display: none;
+    }
+
+    .verdict-badge {
+        min-width: auto;
+        padding: 8px;
+        gap: 0;
+        border-radius: 50%;
+    }
+
+    .verdict-badge-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    /* Header tetap sejajar (judul di kiri, badge di kanan) */
+    .result-header {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .result-header-text {
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* URL di HP jangan terlalu lebar */
+    .result-url {
+        max-width: 100%;
+    }
 }
